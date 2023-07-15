@@ -1,0 +1,93 @@
+﻿version 3.00
+cm_version 1.0
+platform CM-530
+o function faddr_src:lineFollow
+o begin
+o compute param_dest:var:kP_variable param_src:dec_num:1000 aop:- param_src:ir_array:100:203
+o compute param_dest:var:kP param_src:var:kP_constant aop:* param_src:var:kP_variable
+o compute param_dest:var:kD param_src:dec_num:10 aop:* param_src:var:kP
+x compute param_dest:var:kI param_src:dec_num:1 aop:/ param_src:dec_num:10000
+o compute param_dest:var:error param_src:ir_array:100:202 aop:- param_src:ir_array:100:204
+o load param_dest:var:P param_src:var:error
+x compute param_dest:var:I param_src:var:I aop:+ param_src:var:error
+o compute param_dest:var:D param_src:var:error aop:- param_src:var:previousError
+o compute param_dest:var:kPxP param_src:var:kP aop:* param_src:var:P
+x compute param_dest:var:kIxI param_src:var:kI aop:* param_src:var:I
+o compute param_dest:var:kDxD param_src:var:kD aop:* param_src:var:D
+x compute param_dest:var:PI param_src:var:kPxP aop:+ param_src:var:kIxI
+o compute param_dest:var:PID param_src:var:kPxP aop:+ param_src:var:kDxD
+o compute param_dest:var:rightSpeed param_src:var:defaultSpeed aop:+ param_src:var:PID
+o compute param_dest:var:leftSpeed param_src:var:defaultSpeed aop:- param_src:var:PID
+o end
+o main
+o begin
+o compute param_dest:var:kP_constant param_src:dec_num:6 aop:/ param_src:dec_num:10000
+o load param_dest:var:kI param_src:dec_num:0
+o load param_dest:var:kD param_src:dec_num:0
+o load param_dest:var:error param_src:dec_num:0
+o load param_dest:var:previousError param_src:dec_num:0
+o load param_dest:var:I param_src:dec_num:0
+o load param_dest:var:D param_src:dec_num:0
+o load param_dest:var:PID param_src:dec_num:0
+o load param_dest:var:defaultSpeed param_src:dec_num:180
+o load param_dest:var:turnSpeed param_src:dec_num:500
+o load param_dest:var:black param_src:ir_array:100:208
+o wait param_src:cm:4 lop:!= param_src:button_num:8 rop:then
+o while(1)
+o begin
+o if param_src:ir_array:100:205 lop:> param_src:ir_array:100:214 rop:&& param_src:ir_array:100:201 lop:< param_src:ir_array:100:210 rop:then
+o begin
+o // param_text:if (analogRead(5) > threshold[5] && analogRead(1) < threshold[1]), turn left
+o // param_text:Right front motor:
+o compute param_dest:motor:102:107 param_src:dir_num:1024 aop:+ param_src:var:turnSpeed
+o // param_text:RightBack motor:
+o compute param_dest:motor:103:107 param_src:dir_num:1024 aop:+ param_src:var:turnSpeed
+o // param_text:Left front motor:
+o compute param_dest:motor:104:107 param_src:dir_num:1024 aop:+ param_src:var:turnSpeed
+o // param_text:Left Back Motor:
+o compute param_dest:motor:101:107 param_src:dir_num:1024 aop:+ param_src:var:turnSpeed
+o load param_dest:cm:11 param_src:dec_num:10000
+o end
+o elseif param_src:ir_array:100:201 lop:> param_src:ir_array:100:210 rop:&& param_src:ir_array:100:205 lop:< param_src:ir_array:100:214 rop:then
+o begin
+o // param_text:if (analogRead(1) > threshold[1] && analogRead(5) < threshold[5] ), turn right
+o // param_text:Right front motor:
+o compute param_dest:motor:102:107 param_src:dir_num:0 aop:+ param_src:var:turnSpeed
+o // param_text:RightBack motor:
+o compute param_dest:motor:103:107 param_src:dir_num:0 aop:+ param_src:var:turnSpeed
+o // param_text:Left front motor:
+o compute param_dest:motor:104:107 param_src:dir_num:0 aop:+ param_src:var:turnSpeed
+o // param_text:Left Back Motor:
+o compute param_dest:motor:101:107 param_src:dir_num:0 aop:+ param_src:var:turnSpeed
+o load param_dest:cm:11 param_src:dec_num:10001
+o end
+o else
+o begin
+o // param_text:else if (analogRead(3) > threshold[3])
+o call faddr_dest:lineFollow
+o // param_text:Right front motor:
+o compute param_dest:motor:102:107 param_src:dir_num:1024 aop:+ param_src:var:rightSpeed
+o // param_text:RightBack motor:
+o compute param_dest:motor:103:107 param_src:dir_num:1024 aop:+ param_src:var:rightSpeed
+o // param_text:Left front motor:
+o compute param_dest:motor:104:107 param_src:dir_num:0 aop:+ param_src:var:leftSpeed
+o // param_text:Left Back Motor:
+o compute param_dest:motor:101:107 param_src:dir_num:0 aop:+ param_src:var:leftSpeed
+o load param_dest:cm:11 param_src:var:leftSpeed
+o load param_dest:cm:9 param_src:var:rightSpeed
+o load param_dest:cm:9 param_src:var:error
+o end
+x elseif param_src:irarray_num:127 lop:!= param_src:ir_array:100:208 rop:then
+x begin
+o // param_text:Right front motor:
+x compute param_dest:motor:102:107 param_src:dir_num:1024 aop:+ param_src:dec_num:0
+o // param_text:RightBack motor:
+x compute param_dest:motor:103:107 param_src:dir_num:1024 aop:+ param_src:dec_num:0
+o // param_text:Left front motor:
+x compute param_dest:motor:104:107 param_src:dir_num:0 aop:+ param_src:dec_num:0
+o // param_text:Left Back Motor:
+x compute param_dest:motor:101:107 param_src:dir_num:0 aop:+ param_src:dec_num:0
+x load param_dest:cm:11 param_src:dec_num:11111
+x end
+o end
+o end

@@ -1,0 +1,19 @@
+﻿version 3.00
+cm_version 1.0
+platform CM-530
+o main
+o begin
+- 
+o load param_dest:var:defaultSpeed param_src:dec_num:150
+- 
+- 
+o wait param_src:cm:4 lop:!= param_src:button_num:8 rop:then
+o // param_text:Right front motor:
+o compute param_dest:motor:102:107 param_src:dir_num:1024 aop:+ param_src:var:defaultSpeed
+o // param_text:RightBack motor:
+o compute param_dest:motor:103:107 param_src:dir_num:1024 aop:+ param_src:var:defaultSpeed
+o // param_text:Left front motor:
+o compute param_dest:motor:104:107 param_src:dir_num:0 aop:+ param_src:var:defaultSpeed
+o // param_text:Left Back Motor:
+o compute param_dest:motor:101:107 param_src:dir_num:0 aop:+ param_src:var:defaultSpeed
+o end

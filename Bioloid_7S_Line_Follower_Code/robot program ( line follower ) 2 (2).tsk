@@ -1,0 +1,44 @@
+﻿version 3.00
+cm_version 1.0
+platform CM-530
+o main
+o begin
+o while(1)
+o begin
+o if param_src:cm:4 lop:== param_src:button_num:4 rop:then
+o begin
+o while(1)
+o begin
+o load param_dest:var:black param_src:ir_array:100:208
+o if param_src:var:black lop:== param_src:irarray_num:28 rop:|| param_src:var:black lop:== param_src:irarray_num:4 rop:|| param_src:var:black lop:== param_src:irarray_num:8 rop:|| param_src:var:black lop:== param_src:irarray_num:16 rop:then
+o begin
+o load param_dest:motor:104:107 param_src:dir_num:1624
+o load param_dest:motor:102:107 param_src:dir_num:600
+o load param_dest:motor:101:107 param_src:dir_num:600
+o load param_dest:motor:103:107 param_src:dir_num:1624
+o end
+o elseif param_src:var:black lop:== param_src:irarray_num:3 rop:|| param_src:var:black lop:== param_src:irarray_num:1 rop:|| param_src:var:black lop:== param_src:irarray_num:2 rop:then
+o begin
+o load param_dest:motor:104:107 param_src:dir_num:1724
+o load param_dest:motor:102:107 param_src:dir_num:1724
+o load param_dest:motor:101:107 param_src:dir_num:1724
+o load param_dest:motor:103:107 param_src:dir_num:1724
+o end
+o elseif param_src:var:black lop:== param_src:irarray_num:96 rop:|| param_src:var:black lop:== param_src:irarray_num:32 rop:|| param_src:var:black lop:== param_src:irarray_num:64 rop:then
+o begin
+o load param_dest:motor:104:107 param_src:dir_num:700
+o load param_dest:motor:102:107 param_src:dir_num:700
+o load param_dest:motor:101:107 param_src:dir_num:700
+o load param_dest:motor:103:107 param_src:dir_num:700
+o end
+o elseif param_src:var:black lop:== param_src:irarray_num:127 rop:|| param_src:var:black lop:== param_src:irarray_num:62 rop:|| param_src:var:black lop:== param_src:irarray_num:127 rop:then
+o begin
+o load param_dest:motor:104:107 param_src:dir_num:1624
+o load param_dest:motor:102:107 param_src:dir_num:600
+o load param_dest:motor:101:107 param_src:dir_num:600
+o load param_dest:motor:103:107 param_src:dir_num:1624
+o end
+o end
+o end
+o end
+o end

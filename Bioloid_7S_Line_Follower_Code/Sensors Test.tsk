@@ -1,0 +1,17 @@
+﻿version 3.00
+cm_version 1.0
+platform CM-530
+o main
+o begin
+o wait param_src:cm:4 lop:!= param_src:button_num:8 rop:then
+o while(1)
+o begin
+x load param_dest:cm:11 param_src:ir_array:100:209
+o load param_dest:cm:11 param_src:ir_array:100:200
+o end
+- 
+- 
+- 
+- 
+- 
+o end
